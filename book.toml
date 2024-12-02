@@ -1,0 +1,7 @@
+[book]
+authors = ["GreenDelta GmbH"]
+language = "en"
+multilingual = false
+src = "src"
+title = "openLCA Jython Manual"
+theme = "Rust"
