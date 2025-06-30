@@ -1,7 +1,15 @@
 [book]
-authors = ["GreenDelta GmbH"]
+authors = ["GreenDelta GmbH", "François Le Rall"]
 language = "en"
 multilingual = false
 src = "src"
 title = "openLCA Jython Manual"
 theme = "Rust"
+description = "The official manual for using Jython scripting in openLCA"
+
+
+[output.html]
+git-repository-url = "https://github.com/GreenDelta/openLCAJython-manual"
+edit-url-template = "https://github.com/GreenDelta/openLCAJython-manual/edit/main/{path}"
+site-url = "/openLCAJython-manual/"
+favicon = "favicon.png"
