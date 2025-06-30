@@ -20,6 +20,8 @@
   - [The `db` object](user_guide/database/db.md)
   - [Running SQL queries](user_guide/database/running_sql_queries.md)
 
+- [Interacting with the openLCA UI](user_guide/openlca_ui/README.md)
+
 - [Calculation and results](user_guide/result/README.md)
 
   - [Calculation](user_guide/result/calculation.md)
