@@ -31,7 +31,9 @@ via the Python script. The routine is quite simple: create datasets and add them
 > **_NOTE:_** You can run the following lines of code by copy-pasting them in the openLCA Python
 > console. You can also copy the whole [script](minimal_example.py).
 
-First, let's create a flow for the boiling water process.
+First, let's create a flow representing _Boiling water_, using a _Volume_ as dimension. The
+`FlowProperty` tells the system how to measure the quantity of this flow–i.e. in any unit of volume
+(liters or cubic meters, ... ).
 
 ```python
 volume = db.getForName(FlowProperty, "Volume")
