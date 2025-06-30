@@ -22,7 +22,7 @@ into the database you have created. For more information, see
 This database is often a good starting point to start modeling with the Python interface (and in
 openLCA more generally).
 
-## Create the product system
+## Create the product system from scratch
 
 Now that you have created a database and opened it, you will be able to interact with its datasets
 via the Python script. The routine is quite simple: create datasets and add them to the database
