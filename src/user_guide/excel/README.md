@@ -16,6 +16,7 @@ file and read the first cell of the first sheet:
 from java.io import FileInputStream, IOException
 from org.apache.poi.xssf.usermodel import XSSFWorkbook
 
+# Do not forget to edit this path to point to your XLSX file!
 PATH_TO_EXCEL_FILE = '/path/to/file.xlsx'
 
 stream = None
@@ -50,6 +51,7 @@ openLCA.
 from java.io import FileOutputStream, IOException
 from org.apache.poi.xssf.usermodel import XSSFWorkbook
 
+# Do not forget to edit this path to point to your XLSX file!
 PATH_TO_EXCEL_FILE = "/path/to/file.xlsx"
 
 wb = None
@@ -121,6 +123,8 @@ simply use the following code:
 ```python
 from excel import Excel
 
+
+# Do not forget to edit this path to point to your XLSX file!
 PATH_TO_EXCEL_FILE = '/path/to/file.xlsx'
 excel = Excel(PATH_TO_EXCEL_FILE)
 

@@ -41,6 +41,7 @@ CSV file on your system:
 ```python
 import csv
 
+# Do not forget to edit this path to point to your CSV file!
 FILE = "~/path/to/file.csv"
 data = [
     ["Tea", "1.0"],

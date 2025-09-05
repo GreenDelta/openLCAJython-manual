@@ -3,6 +3,7 @@ import string
 from java.io import FileInputStream, FileOutputStream, IOException
 from org.apache.poi.xssf.usermodel import XSSFCell, XSSFSheet, XSSFWorkbook
 
+# Do not forget to edit this path to point to your XLSX file!
 PATH_TO_EXCEL_FILE = "/path/to/excel_automation.xlsx"
 IMPACT_METHOD_ID = "67371e90-e11b-44e2-b7aa-039816c4e281"
 

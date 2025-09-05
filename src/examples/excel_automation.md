@@ -27,6 +27,7 @@ import string
 from java.io import FileInputStream, FileOutputStream, IOException
 from org.apache.poi.xssf.usermodel import XSSFCell, XSSFSheet, XSSFWorkbook
 
+# Do not forget to edit this path to point to your XLSX file!
 PATH_TO_EXCEL_FILE = "/path/to/excel/excel_automation.xlsx"
 
 
