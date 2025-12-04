@@ -34,9 +34,9 @@ When running this line of code, the openLCA console should appear with the messa
 
 ## Relation to standard Python
 
-As said above, Jython runs on the JVM. It implements a great part of the Python 2.7 standard library
-for the JVM. For example the following script will work when you set the file path to an existing
-CSV file on your system:
+Jython runs on the JVM. It implements a great part of the Python 2.7 standard library for the JVM.
+For example the following script will work when you set the file path to an existing CSV file on
+your system:
 
 ```python
 import csv
@@ -81,7 +81,7 @@ Jython**. If you want to interact from standard CPython with openLCA (using Pand
 
 ## The openLCA API
 
-As said above, with Jython you directly access the openLCA Java API. In Jython, you interact with a
+Earlier, we mentioned that with Jython you directly access the openLCA Java API. You interact with a
 Java class in the same way as with a Python class. The openLCA API starts with a set of classes that
 describe the basic data model, like `Flow`, `Process`, `ProductSystem`. You can find these classes
 in the
