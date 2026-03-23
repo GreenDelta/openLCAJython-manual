@@ -13,33 +13,32 @@ openLCA. The package allows to read and write Excel files using the
 file and read the first cell of the first sheet:
 
 ```python
-from java.io import FileInputStream, IOException
-from org.apache.poi.xssf.usermodel import XSSFWorkbook
+from java.io import File
+from org.apache.poi.ss.usermodel import WorkbookFactory
 
-# Do not forget to edit this path to point to your XLSX file!
-PATH_TO_EXCEL_FILE = '/path/to/file.xlsx'
+# This example would read an Excel file from this path
+PATH = "/path/to/file.xlsx"
 
-stream = None
-wb = None
-try:
-    stream = FileInputStream(self.path)
-    wb = XSSFWorkbook(stream)
+# Load the workbook from the file
+workbook = WorkbookFactory.create(File(PATH))
 
-    sheet = wb.getSheetAt(0)
-    row = sheet.getRow(0)
-    cell = row.getCell(0)
+# Get the first sheet (indices are 0 based)
+sheet = workbook.getSheetAt(0)
 
-    print("Content of cell A1:", cell.getStringCellValue())
-except IOException as e:
-    print("Error reading file:", e)
-finally:
-    try:
-        if stream is not None:
-            stream.close()
-        if wb is not None:
-            wb.close()
-    except:
-        pass
+# Now you can use the Excel utility to read values from the sheet
+# again, the indices of rows and columns are 0 based
+row = 0
+column = 0
+# This would read a string value from a cell
+string = Excel.getString(sheet, row, column)
+print("String value of cell A1: %s" % string)
+
+# And this would read a numeric value from a cell
+number = Excel.getDouble(sheet, row + 1, column + 1)
+print("Numeric value of cell B2: %d" % number)
+
+# finally, it is good to close the workbook to clean up resources
+workbook.close()
 ```
 
 ### Write one cell
@@ -48,29 +47,36 @@ To export a spreadsheet file from openLCA, you can use the same package XSSF tha
 openLCA.
 
 ```python
-from java.io import FileOutputStream, IOException
+from java.io import FileOutputStream
 from org.apache.poi.xssf.usermodel import XSSFWorkbook
 
-# Do not forget to edit this path to point to your XLSX file!
-PATH_TO_EXCEL_FILE = "/path/to/file.xlsx"
+# Path where the Excel file will be written
+path = "/path/to/file.xlsx"
 
-wb = None
-try:
-    wb = XSSFWorkbook()
-    sheet = wb.createSheet("Sheet2")
-    sheet.createRow(0).createCell(0).setCellValue("Hello from openLCA!")
-    wb.write(FileOutputStream(PATH_TO_EXCEL_FILE))
-except IOException as e:
-    print("Error writing file:", e)
-finally:
-    try:
-        if wb is not None:
-            wb.close()
-    except:
-        pass
+# Create a new Excel workbook (XLSX format)
+workbook = XSSFWorkbook()
+
+# Create a new sheet named "Sheet2"
+sheet = workbook.createSheet("Sheet2")
+
+# Create the first row (index 0) and first cell (index 0)
+# and set a string value inside it
+row = sheet.createRow(0)
+cell = row.createCell(0)
+cell.setCellValue("Hello from openLCA!")
+
+# Write the workbook content to the file
+output_stream = FileOutputStream(path)
+workbook.write(output_stream)
+
+# Close the output stream to ensure data is properly saved
+output_stream.close()
+
+# Close the workbook to free resources
+workbook.close()
 ```
 
-### Make an Excel class
+### Optional make an Excel class
 
 To make your life easier, you can create a class that encapsulates the above code. This way, you can
 use the class to read and write Excel files. Simply create a file `excel.py` in your user directory
