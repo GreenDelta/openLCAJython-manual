@@ -20,12 +20,12 @@ print(chromium6.category.name) # prints: unspecified
 print(chromium6.category.category.name) # prints: Emission to air
 ```
 
-To create a category, we use the `Category.of` and `Category.childOf` method:
+To create a category and more generally a full path, we use the `CategoryDao.sync` method. It will
+create the categories if they do not exist and return the category of the last segment.
 
 ```python
-emission = Category.of("Emission to air", Flow)
-unspecified = Category.childOf(emission, "unspecified")
-chromium6.category = unspecified
+emission_unspecified = CategoryDao.sync(db, ModelType.FLOW, "Emission to air", "unspecified")
+chromium6.category = emission_unspecified
 ```
 
 ## Parameters
