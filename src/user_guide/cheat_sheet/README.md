@@ -9,6 +9,15 @@
 - `Ctrl + Enter`/`Cmd + Enter` to insert a new line below the current line
 - `Ctrl + /`/`Cmd + /` to comment/uncomment out a line or a selection
 
+## Update the navigation bar
+
+As the navigation bar does not update automatically when running code in the editor, you can update
+it programmatically with:
+
+```python
+App.runInUI("Update navigator", lambda: Navigator.refresh())
+```
+
 ## Clear the console
 
 You can clear the console before running the code with the following command:
