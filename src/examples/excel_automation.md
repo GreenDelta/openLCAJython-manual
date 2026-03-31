@@ -24,35 +24,22 @@ named "Processes". The callback function will print the process information to t
 ```python
 import string
 
-from java.io import FileInputStream, FileOutputStream, IOException
-from org.apache.poi.xssf.usermodel import XSSFCell, XSSFSheet, XSSFWorkbook
+from java.io import FileInputStream, FileOutputStream
+from org.apache.poi.ss.usermodel import WorkbookFactory
+
 
 # Do not forget to edit this path to point to your XLSX file!
-PATH_TO_EXCEL_FILE = "/path/to/excel/excel_automation.xlsx"
+PATH = "/path/to/excel/excel_automation.xlsx"
+
+# Load the workbook from the file (using FileInputStream to be able to later write to it)
+input_stream = FileInputStream(PATH)
+workbook = WorkbookFactory.create(input_stream)
+
+# Get the Processes sheet
+sheet = workbook.getSheet("Processes")
 
 
-def write(path, callback):  # type: (str, Callable[[XSSFWorkbook], None]) -> None
-    stream = None
-    wb = None
-    try:
-        stream = FileInputStream(path)
-
-        wb = XSSFWorkbook(stream)
-        callback(wb)
-
-        wb.write(FileOutputStream(path))
-    except IOException as e:
-        print("Error", e)
-    finally:
-        try:
-            if stream is not None:
-                stream.close()
-            if wb is not None:
-                wb.close()
-        except:
-            pass
-
-
+# This function is an helper to use the cell names (A1, B1, C1, etc.) instead of their index
 def get_cell(sheet, column, row):  # type: (XSSFSheet, str, int) -> XSSFCell
     column_label = string.ascii_uppercase.index(column)
     return sheet.getRow(row).getCell(column_label)
@@ -66,35 +53,34 @@ def get_numeric_cell(sheet, column, row):  # type: (XSSFSheet, str, int) -> floa
     return get_cell(sheet, column, row).getNumericCellValue()
 
 
-def get_process_info(wb):  # wb: XSSFWorkbook -> Generator[dict[str, str or float]]:
-    sheet = wb.getSheet("Processes")
+def get_process_info(sheet):  # sheet: XSSFSheet -> Generator[dict[str, str or float]]:
     for i in range(1, sheet.getLastRowNum() + 1):
         name = get_string_cell(sheet, "A", i)
-        uuid = get_string_cell(sheet, "B", i)
-        amount = get_numeric_cell(sheet, "C", i)
-        yield {"name": name, "uuid": uuid, "amount": amount}
+        amount = get_numeric_cell(sheet, "B", i)
+        uuid = get_string_cell(sheet, "C", i)
+        yield {"name": name, "amount": amount, "uuid": uuid}
 
 
-def print_process_info(wb):
-    for process in get_process_info(wb):
-        print(process)
+for process in get_process_info(sheet):
+    print(process)
 
-
-write(PATH_TO_EXCEL_FILE, print_process_info)
+workbook.close()
 ```
 
 ## Create product systems and run impact calculations
 
-Now that we have access the processes information, we can modify the callback function so that we
-create product systems and run impact calculations on them. The following code snippet will create a
+Now that we have access the processes information, we can modify the script so that we create
+product systems and run impact calculations on them. The following code snippet will create a
 product system for each process and run impact calculations on it. The results are then printed to
 the console.
 
 ```python
+IMPACT_METHOD_ID = "67371e90-e11b-44e2-b7aa-039816c4e281"
+
 def product_system_from_process(uuid):  # type: (str) -> ProductSystem
     process = db.get(Process, uuid)
     if not isinstance(process, Process):
-        raise Exception("Process not found")
+        raise Exception("Process not found: " + uuid)
 
     config = (
         LinkingConfig()
@@ -124,9 +110,8 @@ def impacts_of(
             "unit": impact.impact().referenceUnit,
         }
 
-
-def run_calculations(wb):
-    for process in get_process_info(wb):
+def run_calculations(sheet):
+    for process in get_process_info(sheet):
         print("Running impact calculation for %s..." % process["name"])
         for impact in impacts_of(process):
             print(
@@ -134,8 +119,7 @@ def run_calculations(wb):
                 % (impact["name"], impact["value"], impact["unit"])
             )
 
-
-write(PATH_TO_EXCEL_FILE, run_calculations)
+run_calculations(sheet)
 ```
 
 ## Store the results in a new sheet
@@ -144,10 +128,10 @@ Now that we have the results, we can store them in sheets. Let's modify the call
 that it creates a new sheet for each process and stores the results in it.
 
 ```python
-def get_or_create_sheet(wb, name):  # type: (XSSFWorkbook, str) -> XSSFSheet
-    sheet = wb.getSheet(name)
+def get_or_create_sheet(workbook, name):  # type: (XSSFWorkbook, str) -> XSSFSheet
+    sheet = workbook.getSheet(name)
     if sheet is None:
-        return wb.createSheet(name)
+        return workbook.createSheet(name)
     else:
         return sheet
 
@@ -170,14 +154,22 @@ def write_impacts_to_sheet(
         sheet.autoSizeColumn(i)
 
 
-def write_results(wb):
-    for process in get_process_info(wb):
-        sheet = get_or_create_sheet(wb, process["name"])
-        print("Running impact calculation for %s..." % process["name"])
-        impacts = list(impacts_of(process))
-        write_impacts_to_sheet(sheet, impacts)
-    print("Done")
+for process in get_process_info(sheet):
+    sheet = get_or_create_sheet(workbook, process["name"])
+    print("Running impact calculation for %s..." % process["name"])
+    impacts = list(impacts_of(process))
+    write_impacts_to_sheet(sheet, impacts)
 
+# Write the workbook content to the file
+output_stream = FileOutputStream(PATH)
+workbook.write(output_stream)
 
-write(PATH_TO_EXCEL_FILE, write_results)
+# Close the input and output streams to ensure data is properly saved
+input_stream.close()
+output_stream.close()
+
+# Close the workbook to free resources
+workbook.close()
+
+print("Done")
 ```

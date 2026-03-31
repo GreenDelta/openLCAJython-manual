@@ -1,35 +1,21 @@
 import string
 
-from java.io import FileInputStream, FileOutputStream, IOException
-from org.apache.poi.xssf.usermodel import XSSFCell, XSSFSheet, XSSFWorkbook
+from java.io import FileInputStream, FileOutputStream
+from org.apache.poi.ss.usermodel import WorkbookFactory
 
 # Do not forget to edit this path to point to your XLSX file!
-PATH_TO_EXCEL_FILE = "/path/to/excel_automation.xlsx"
+PATH = "/path/to/file.xlsx"
 IMPACT_METHOD_ID = "67371e90-e11b-44e2-b7aa-039816c4e281"
 
+# Load the workbook from the file
+input_stream = FileInputStream(PATH)
+workbook = WorkbookFactory.create(input_stream)
 
-def write(path, callback):  # type: (str, Callable[[XSSFWorkbook], None]) -> None
-    stream = None
-    wb = None
-    try:
-        stream = FileInputStream(path)
-
-        wb = XSSFWorkbook(stream)
-        callback(wb)
-
-        wb.write(FileOutputStream(path))
-    except IOException as e:
-        print("Error", e)
-    finally:
-        try:
-            if stream is not None:
-                stream.close()
-            if wb is not None:
-                wb.close()
-        except:
-            pass
+# Get the Processes sheet
+sheet = workbook.getSheet("Processes")
 
 
+# This function is an helper to use the cell names (A1, B1, C1, etc.) instead of their index
 def get_cell(sheet, column, row):  # type: (XSSFSheet, str, int) -> XSSFCell
     column_label = string.ascii_uppercase.index(column)
     return sheet.getRow(row).getCell(column_label)
@@ -43,19 +29,18 @@ def get_numeric_cell(sheet, column, row):  # type: (XSSFSheet, str, int) -> floa
     return get_cell(sheet, column, row).getNumericCellValue()
 
 
-def get_process_info(wb):  # wb: XSSFWorkbook -> Generator[dict[str, str or float]]:
-    sheet = wb.getSheet("Processes")
+def get_process_info(sheet):  # sheet: XSSFSheet -> Generator[dict[str, str or float]]:
     for i in range(1, sheet.getLastRowNum() + 1):
         name = get_string_cell(sheet, "A", i)
-        uuid = get_string_cell(sheet, "B", i)
-        amount = get_numeric_cell(sheet, "C", i)
-        yield {"name": name, "uuid": uuid, "amount": amount}
+        amount = get_numeric_cell(sheet, "B", i)
+        uuid = get_string_cell(sheet, "C", i)
+        yield {"name": name, "amount": amount, "uuid": uuid}
 
 
 def product_system_from_process(uuid):  # type: (str) -> ProductSystem
     process = db.get(Process, uuid)
     if not isinstance(process, Process):
-        raise Exception("Process not found")
+        raise Exception("Process not found: " + uuid)
 
     config = (
         LinkingConfig()
@@ -86,17 +71,27 @@ def impacts_of(
         }
 
 
-def get_or_create_sheet(wb, name):  # type: (XSSFWorkbook, str) -> XSSFSheet
-    sheet = wb.getSheet(name)
+def run_calculations(sheet):
+    for process in get_process_info(sheet):
+        print("Running impact calculation for %s..." % process["name"])
+        for impact in impacts_of(process):
+            print(
+                "The total impact on %s is %.4f %s."
+                % (impact["name"], impact["value"], impact["unit"])
+            )
+
+
+def get_or_create_sheet(workbook, name):  # type: (XSSFWorkbook, str) -> XSSFSheet
+    sheet = workbook.getSheet(name)
     if sheet is None:
-        return wb.createSheet(name)
+        return workbook.createSheet(name)
     else:
         return sheet
 
 
 def write_impacts_to_sheet(
     sheet, impacts
-):  # type: (XSSFSheet, Generator[dict[str, float or str]]) -> None
+):  # type: (XSSFSheet, dict[str, float or str]) -> None
     row = sheet.createRow(0)
     row.createCell(0).setCellValue("Name")
     row.createCell(1).setCellValue("Value")
@@ -112,27 +107,21 @@ def write_impacts_to_sheet(
         sheet.autoSizeColumn(i)
 
 
-def print_process_info(wb):
-    for process in get_process_info(wb):
-        print(process)
+for process in get_process_info(sheet):
+    sheet = get_or_create_sheet(workbook, process["name"])
+    print("Running impact calculation for %s..." % process["name"])
+    impacts = list(impacts_of(process))
+    write_impacts_to_sheet(sheet, impacts)
 
+# Write the workbook content to the file
+output_stream = FileOutputStream(PATH)
+workbook.write(output_stream)
 
-def run_calculations(wb):
-    for process in get_process_info(wb):
-        print("Running impact calculation for %s..." % process["name"])
-        for impact in impacts_of(process):
-            print(
-                "The total impact on %s is %.4f %s."
-                % (impact["name"], impact["value"], impact["unit"])
-            )
+# Close the input and output streams to ensure data is properly saved
+input_stream.close()
+output_stream.close()
 
+# Close the workbook to free resources
+workbook.close()
 
-def write_results(wb):
-    for process in get_process_info(wb):
-        sheet = get_or_create_sheet(wb, process["name"])
-        print("Running impact calculation for %s..." % process["name"])
-        write_impacts_to_sheet(sheet, impacts_of(process))
-    print("Done")
-
-
-write(PATH_TO_EXCEL_FILE, write_results)
+print("Done")
