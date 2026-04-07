@@ -223,6 +223,14 @@ waste = Flow.waste(
 process.input(waste, 4.2)  # flow: Flow, amount: float
 ```
 
+To change the amount of the exchange of a process, we can fetch the exchange from the list and
+modify the amount value:
+
+```python
+exchange = next(e for e in process.exchanges if e.flow.name == "Molten aluminium")
+exchange.amount = 4.2
+```
+
 ## Product systems
 
 A product system describes the supply chain of a product (the functional unit).
