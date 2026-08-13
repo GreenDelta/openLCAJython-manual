@@ -1,20 +1,3 @@
-# Excel automation
-
-This example shows how a tedious task can be automated using a spreadsheet and Jython.
-
-Our use case is the following:
-
-- We have a spreadsheet with a list of processes and their UUIDs.
-- We want to create a product system for each process and run impact calculations on it.
-- We want to store the results in a new sheet in the same spreadsheet.
-
-An example spreadsheet can be downloaded [here](excel_automation.xlsx). It provides a list of
-processes from the _ecoinvent v3.10.1 APOS_ database.
-
-Checkout the [Integration with Excel](../user_guide/excel) chapter for more details about how to
-open the spreadsheet.
-
-```python
 import string
 
 from java.io import FileInputStream, FileOutputStream
@@ -149,4 +132,3 @@ output_stream.close()
 workbook.close()
 
 print("Done")
-```
