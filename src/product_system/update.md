@@ -10,7 +10,7 @@ product_system = ProductSystem.of("Aluminium production", process)
 uuid = product_system.refId
 db.insert(aluminium, process, product_system)
 
-# get the product system from the database (the UUID can be copied from the 
+# get the product system from the database (the UUID can be copied from the
 # product system page)
 product_system = db.get(ProductSystem, uuid)
 

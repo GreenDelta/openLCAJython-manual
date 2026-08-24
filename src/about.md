@@ -8,8 +8,9 @@ We encourage you to:
 - [Open an issue](https://github.com/GreenDelta/openLCAJython-manual/issues) if you encounter
   something that does not work or is unclear.
 
-- [Contribute](https://github.com/GreenDelta/openLCAJython-manual) improvements, fixes, or new examples. If you have built a useful script or utility with
-  Jython in openLCA, others would certainly benefit from it.
+- [Contribute](https://github.com/GreenDelta/openLCAJython-manual) improvements, fixes, or new
+  examples. If you have built a useful script or utility with Jython in openLCA, others would
+  certainly benefit from it.
 
 - Share feedback, questions, or suggestions in the [openLCA forum](https://ask.openlca.org/).
 

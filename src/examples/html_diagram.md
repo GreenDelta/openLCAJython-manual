@@ -131,8 +131,8 @@ def main():
 App.runInUI("Visualizing Chromium Emission Levels", main)
 ```
 
-To see the result, copy and paste the code above in the openLCA Python console
-in an opened ecoinvent database.
+To see the result, copy and paste the code above in the openLCA Python console in an opened
+ecoinvent database.
 
 With ecoinvent 3.10.1 (APOS), the result looks like this:
 

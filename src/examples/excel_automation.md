@@ -11,8 +11,7 @@ Our use case is the following:
 An example spreadsheet can be downloaded [here](excel_automation.xlsx). It provides a list of
 processes from the _ecoinvent v3.10.1 APOS_ database.
 
-Checkout the [Integration with Excel](../user_guide/excel) chapter for more details about how to
-open the spreadsheet.
+Checkout the [Excel](../excel) chapter for more details about how to open the spreadsheet.
 
 ```python
 import string
@@ -21,8 +20,8 @@ from java.io import FileInputStream, FileOutputStream
 from org.apache.poi.ss.usermodel import WorkbookFactory
 
 # Do not forget to edit this path to point to your XLSX file!
-PATH = "/home/francois/Downloads/excel_automation.xlsx"
-IMPACT_METHOD_ID = "67371e90-e11b-44e2-b7aa-039816c4e281"
+PATH = "path/to/excel_automation.xlsx"
+IMPACT_METHOD_ID = "IMPACT_METHOD_ID"
 
 # loads the workbook from the file, we are using a FileInputStream to be able to later write to it
 input_stream = FileInputStream(PATH)

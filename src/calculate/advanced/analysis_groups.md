@@ -6,7 +6,8 @@ allowing later to group results (see
 
 ## Get the analysis groups
 
-The `AnalysisGroup` object contains the `name` and `color` of the analysis group and a set of `processes` IDs.
+The `AnalysisGroup` object contains the `name` and `color` of the analysis group and a set of
+`processes` IDs.
 
 You can get the analysis groups information from the product system as follows:
 

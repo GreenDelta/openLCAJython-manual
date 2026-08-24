@@ -1,6 +1,5 @@
 # Calculate
 
-
 - [Simple calculation](simple.md)
 - [Parameter redefinitions](parameter_redefinitions.md)
 - [Sensitivity analysis](sensitivity_analysis.md)

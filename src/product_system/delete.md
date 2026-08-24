@@ -1,4 +1,5 @@
 # Delete a product system
+
 ```python
 # let's assume we want to delete the following product system from the database
 mass = db.getForName(FlowProperty, "Mass")

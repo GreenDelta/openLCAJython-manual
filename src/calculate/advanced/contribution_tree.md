@@ -21,12 +21,13 @@ types of result and the provider (`TechFlow`). The root node of the tree can be 
 `UpstreamTree.root` attribute. And the children of a node can be retrieved via the
 `UpstreamTree.childs` method.
 
-- `provider()`: Returns the provider of the product output or waste input of this upstream tree node.
+- `provider()`: Returns the provider of the product output or waste input of this upstream tree
+  node.
 - `result()`: Returns the upstream result of this node.
 - `requiredAmount()`: Returns the required amount of the provider flow of this upstream node.
 - `scalingFactor()`: Returns the scaling factor of this upstream node.
-- `directContribution()`: Returns the direct contribution of the process (tech-flow) of the node
-    to the total result the node.
+- `directContribution()`: Returns the direct contribution of the process (tech-flow) of the node to
+  the total result the node.
 
 ## Traversing the tree, breath-first
 

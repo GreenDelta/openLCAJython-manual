@@ -1,7 +1,7 @@
 # Create a new process with already existing flow and provider
 
-This example creates a new process for the production of tea, using the
-elementary flow "Water", already existing in the database.
+This example creates a new process for the production of tea, using the elementary flow "Water",
+already existing in the database.
 
 ```python
 # let's assume the "Water" elementary flow already exists

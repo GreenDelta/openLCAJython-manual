@@ -40,8 +40,8 @@ for tech_flow in tech_index:
 The scaled technosphere flows of a process are the scaled inputs and outputs of the linked product
 and waste flows of that process related to the final demand of the product system. They can be
 obtained with the `getScaledTechFlowsOf` method. It will return a list of `TechFlowValue`, which is
-a record that contains a `techFlow()` (see `TechFlow` above) and a `value()` (the scaled
-amount of the flow).
+a record that contains a `techFlow()` (see `TechFlow` above) and a `value()` (the scaled amount of
+the flow).
 
 For example, to get the scaled technosphere flows amount of the first process in the technosphere
 matrix:

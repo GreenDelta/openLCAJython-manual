@@ -5,6 +5,7 @@ The calculation setup can be configured by adding the `with...` methods.
 ## Allocation method
 
 The allocation method can be selected among the following options:
+
 - `AllocationMethod.USE_DEFAULT`,
 - `AllocationMethod.CAUSAL`,
 - `AllocationMethod.ECONOMIC`,
@@ -28,7 +29,6 @@ setup = (
 
 result = SystemCalculator(db).calculate(setup)
 ```
-
 
 ## Costs
 

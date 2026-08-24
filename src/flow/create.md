@@ -2,7 +2,6 @@
 
 The following example creates three flows: a **product**, a **waste** and an **elementary** flow.
 
-
 ```python
 # get the mass and volume flow properties from the database
 mass = db.getForName(FlowProperty, "Mass")

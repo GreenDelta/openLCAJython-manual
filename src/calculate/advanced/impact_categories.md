@@ -3,9 +3,8 @@
 ## Impact assessment result
 
 In order to get the results of an impact assessment, we use the `getTotalImpacts` method. It will
-return a list of `ImpactValue`s. An `ImpactValue` provides two methods: `impact()` that describes the
-impact category and `value()`.
-
+return a list of `ImpactValue`s. An `ImpactValue` provides two methods: `impact()` that describes
+the impact category and `value()`.
 
 > **_NOTE:_** More information about `ImpactDescriptor` can be found in the
 > [Meta classes](../../advanced/meta_classes.md#impactdescriptor) chapter.
