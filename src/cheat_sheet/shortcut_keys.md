@@ -1,8 +1,10 @@
 # Shortcut keys
 
-- `Ctrl + Shift + Enter`/`Ctrl + Shift + Enter` to run the code in the editor
-- `Ctrl + X`/`Cmd + X` to cut a line or a selection
-- `Ctrl + C`/`Cmd + C` to copy a line or a selection
-- `Ctrl + V`/`Cmd + V` to paste a line or a selection
-- `Ctrl + Enter`/`Cmd + Enter` to insert a new line below the current line
-- `Ctrl + /`/`Cmd + /` to comment/uncomment out a line or a selection
+| Action                                     | Windows / Linux        | macOS                 |
+| ------------------------------------------ | ---------------------- | --------------------- |
+| Run code                                   | `Ctrl + Shift + Enter` | `Ctrl + Shift + Enter` |
+| Cut line / selection                       | `Ctrl + X`             | `Cmd + X`             |
+| Copy line / selection                      | `Ctrl + C`             | `Cmd + C`             |
+| Paste line / selection                     | `Ctrl + V`             | `Cmd + V`             |
+| Insert line below current line             | `Ctrl + Enter`         | `Cmd + Enter`         |
+| Comment or uncomment a line or a selection | `Ctrl + /`             | `Cmd + /`             |
