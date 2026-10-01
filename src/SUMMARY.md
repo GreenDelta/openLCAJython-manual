@@ -6,6 +6,8 @@
 
 [A minimal example](minimal_example.md)
 
+[How scripts run](how_scripts_run.md)
+
 - [Flow](flow/README.md)
   - [Create from scratch](flow/create.md)
   - [Get from the database](flow/from_database.md)
@@ -63,9 +65,11 @@
   - [More database functions](advanced/database_functions.md)
   - [Running SQL queries](advanced/running_sql_queries.md)
   - [Interacting with the openLCA UI](advanced/openlca_ui.md)
+  - [What you can import](advanced/imports.md)
   - [Create modules](advanced/create_modules.md)
   - [Meta classes](advanced/meta_classes.md)
   - [To go further](advanced/further.md)
 - [Examples](examples/README.md)
   - [Display a diagram with HTML](examples/html_diagram.md)
   - [Excel automation](examples/excel_automation.md)
+  - [Batch calculate to Excel](examples/batch_calculate_to_excel.md)
