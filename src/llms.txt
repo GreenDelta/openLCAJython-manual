@@ -1,0 +1,138 @@
+# openLCA Jython Manual
+
+> Action-oriented manual for scripting openLCA with Jython (Python 2.7 on the JVM). Each page is one
+> task with a self-contained, copy-pasteable script, tested against openLCA 2.6.2. Scripts run in the
+> editor at `Tools → Developer Tools → Python`.
+
+Execution model (important for generating correct scripts):
+
+- Scripts run in Jython 2.7. The editor pre-binds three globals — `db` (the open database; `None` if
+  none is open), `log` (SLF4J logger), `direct` (helper for lazy collection fields).
+- It also auto-imports, under its simple name, the first public class/enum/record of every file in
+  `olca-core`, `olca-io`, `olca-proto-io`, `olca-ipc` (~640 classes), so `Flow`, `Process`,
+  `ProductSystem`, `CalculationSetup`, `SystemCalculator`, `Excel`, `App`, `Navigator`, etc. are used
+  **without any import**. Interfaces are NOT bound (e.g. `ProviderType` must be imported).
+- Use the global `db` for all database CRUD and lookups (`db.get`, `db.getForName`, `db.getAll`,
+  `db.insert`, `db.update`, `db.delete`). `db.getForName` returns the first match; use a model DAO
+  (`ProcessDao(db).getForName(name)`) only to get every match of a repeated name, or for bulk delete.
+- A few helpers still need imports (`MsgBox`, `Labels`, `Consumer`, `HashSet`, `FileOutputStream`,
+  `WorkbookFactory`, SWT classes) — see the binding reference below.
+
+## Binding reference (for generating scripts)
+
+Available without import (auto-bound). The classes used for scripting:
+
+- Model (`org.openlca.core.model`, all 59): AbstractEntity, AbstractExchange, Actor, AllocationFactor, AllocationMethod, AnalysisGroup, CalculationSetup, Category, Currency, DQIndicator, DQScore, DQSystem, Direction, Epd, EpdModule, EpdProduct, EpdType, Exchange, Flow, FlowProperty, FlowPropertyFactor, FlowPropertyType, FlowResult, FlowType, ImpactCategory, ImpactFactor, ImpactMethod, ImpactResult, Location, MappingFile, ModelType, NwFactor, NwSet, Parameter, ParameterRedef, ParameterRedefSet, ParameterScope, ParameterizedEntity, Process, ProcessGroup, ProcessGroupSet, ProcessLink, ProcessType, ProductSystem, Project, ProjectVariant, RefEntity, Result, RiskLevel, RootEntity, SocialAspect, SocialIndicator, Source, TypedRefId, Uncertainty, UncertaintyType, Unit, UnitGroup, Version.
+- Descriptors (`org.openlca.core.model.descriptors`, all 23): Descriptor, RootDescriptor, DescriptorBuilder, ActorDescriptor, CategoryDescriptor, CurrencyDescriptor, DQSystemDescriptor, EpdDescriptor, FlowDescriptor, FlowPropertyDescriptor, ImpactDescriptor, ImpactMethodDescriptor, LocationDescriptor, NwSetDescriptor, ParameterDescriptor, ProcessDescriptor, ProductSystemDescriptor, ProjectDescriptor, ResultDescriptor, SocialIndicatorDescriptor, SourceDescriptor, UnitDescriptor, UnitGroupDescriptor.
+- Calculation & results: SystemCalculator, LcaResult, TechFlow, TechFlowValue, TechIndex, EnviFlow, EnviFlowValue, EnviIndex, ImpactValue, UpstreamTree, UpstreamNode, Sankey, NwSetTable, Contribution, SimulationResult, ProductSystemBuilder, LinkingConfig, ProviderLinking.
+- I/O: Excel. UI: App, Navigator, Editors, ResultEditor, Workspace.
+- Database access: use the global `db` (get / getForName / getAll / getDescriptor(s) / insert / update / delete). The model DAOs (ProcessDao, FlowDao, ProductSystemDao, CategoryDao, …) and NativeSql are also bound, but only needed to get all datasets of a repeated name, for bulk `deleteAll`, or for raw JPQL.
+
+Need an explicit import: MsgBox, Labels (`org.openlca.app.util`); Consumer (`java.util.function`); HashSet (`java.util`); FileInputStream, FileOutputStream (`java.io`); WorkbookFactory (`org.apache.poi.ss.usermodel`); SWT, Browser, Shell, Display, FillLayout (`org.eclipse.swt...`). Interfaces are NOT auto-bound (e.g. ProviderType → `from org.openlca.core.model import ProviderType`). CPython C-extension libraries (NumPy / Pandas / SciPy) do not work in Jython — use the IPC API instead.
+- Most scripts assume an open database that contains reference data and LCIA methods (free from Nexus;
+  see "A minimal example").
+
+## Getting started
+
+- [Introduction](https://greendelta.github.io/openLCAJython-manual/introduction/index.html): What Jython is in openLCA and how to open the Python editor.
+- [About this manual](https://greendelta.github.io/openLCAJython-manual/about.html): Scope, version (tested on 2.6.2), and how to contribute.
+- [A minimal example](https://greendelta.github.io/openLCAJython-manual/minimal_example.html): End-to-end walkthrough — set up a database with reference data and LCIA methods, build a product system, and calculate.
+- [How scripts run](https://greendelta.github.io/openLCAJython-manual/how_scripts_run.html): The execution model: pre-bound globals and the classes available without imports.
+
+## Flow
+
+- [Flow](https://greendelta.github.io/openLCAJython-manual/flow/index.html): What a flow is; the three flow types and the reference flow property.
+- [Create from scratch](https://greendelta.github.io/openLCAJython-manual/flow/create.html): Create product, waste, and elementary flows.
+- [Get from the database](https://greendelta.github.io/openLCAJython-manual/flow/from_database.html): Retrieve flows by name, by UUID, as descriptors, or all of them.
+- [Update with more info](https://greendelta.github.io/openLCAJython-manual/flow/update.html): Add more information to an existing flow.
+- [Move to a category](https://greendelta.github.io/openLCAJython-manual/flow/to_category.html): Move a flow into a category.
+- [Delete a flow](https://greendelta.github.io/openLCAJython-manual/flow/delete.html): Delete a flow.
+
+## Process
+
+- [Process](https://greendelta.github.io/openLCAJython-manual/process/index.html): What a process is; unit vs system processes.
+- [Create from scratch](https://greendelta.github.io/openLCAJython-manual/process/create.html): Create a process with a quantitative reference and input/output exchanges.
+- [Create from existing flow](https://greendelta.github.io/openLCAJython-manual/process/from_existing.html): Create a process from an existing flow.
+- [Get from the database](https://greendelta.github.io/openLCAJython-manual/process/from_database.html): Retrieve processes by name, by UUID, as descriptors, or all.
+- [Update with more info](https://greendelta.github.io/openLCAJython-manual/process/update.html): Add more information to an existing process.
+- [Parametrize input exchanges](https://greendelta.github.io/openLCAJython-manual/process/parametrize.html): Parametrize exchanges with global and process parameters.
+- [Add a default provider](https://greendelta.github.io/openLCAJython-manual/process/add_default_provider.html): Set the default provider of an input exchange.
+- [Update exchange amount](https://greendelta.github.io/openLCAJython-manual/process/get_exchange.html): Change the amount of an exchange.
+- [Move to a category](https://greendelta.github.io/openLCAJython-manual/process/to_category.html): Move a process into a category.
+- [Delete a process](https://greendelta.github.io/openLCAJython-manual/process/delete.html): Delete a process.
+
+## Product system
+
+- [Product system](https://greendelta.github.io/openLCAJython-manual/product_system/index.html): What a product system is (functional unit, reference process).
+- [Create from a process](https://greendelta.github.io/openLCAJython-manual/product_system/create.html): Build a product system from a reference process with auto-linking.
+- [Get from the database](https://greendelta.github.io/openLCAJython-manual/product_system/from_database.html): Retrieve product systems by name, UUID, descriptor, or all.
+- [Update with more info](https://greendelta.github.io/openLCAJython-manual/product_system/update.html): Add more information to a product system.
+- [Add a parameter redefinition set](https://greendelta.github.io/openLCAJython-manual/product_system/add_parameter_redefinition_set.html): Add parameter redefinition sets (scenarios).
+- [Move to a category](https://greendelta.github.io/openLCAJython-manual/product_system/to_category.html): Move a product system into a category.
+- [Delete a product system](https://greendelta.github.io/openLCAJython-manual/product_system/delete.html): Delete a product system.
+
+## Impact method
+
+- [Impact method](https://greendelta.github.io/openLCAJython-manual/impact_method/index.html): What LCIA methods are; Nexus databases often need methods imported.
+- [Create from scratch](https://greendelta.github.io/openLCAJython-manual/impact_method/create.html): Create a method with impact categories and characterization factors.
+- [Get from the database](https://greendelta.github.io/openLCAJython-manual/impact_method/from_database.html): Retrieve impact methods by name, UUID, descriptor, or all.
+- [Parametrize impact category](https://greendelta.github.io/openLCAJython-manual/impact_method/parametrize.html): Parametrize an impact category's characterization factors.
+- [Delete an impact method](https://greendelta.github.io/openLCAJython-manual/impact_method/delete.html): Delete an impact method.
+
+## Calculate
+
+- [Calculate](https://greendelta.github.io/openLCAJython-manual/calculate/index.html): What a calculation produces and the setup options.
+- [Simple calculation](https://greendelta.github.io/openLCAJython-manual/calculate/simple.html): Run a calculation and read a total impact value.
+- [Parameter redefinitions](https://greendelta.github.io/openLCAJython-manual/calculate/parameter_redefinitions.html): Calculate with parameter redefinitions.
+- [Sensitivity analysis](https://greendelta.github.io/openLCAJython-manual/calculate/sensitivity_analysis.html): Vary parameters across iterations.
+- [Parameter redefinition sets](https://greendelta.github.io/openLCAJython-manual/calculate/parameter_redefinition_sets.html): Calculate with named parameter redefinition sets.
+- [Normalization and weighting sets](https://greendelta.github.io/openLCAJython-manual/calculate/nw_sets.html): Apply a normalization and weighting set.
+- [Extended calculation setup](https://greendelta.github.io/openLCAJython-manual/calculate/calculation_setup.html): Configure allocation, costs, and regionalization with `with...` methods.
+- [Advanced result access](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/index.html): The `LcaResult` object and advanced result access.
+- [Technosphere flows](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/technosphere_flows.html): The technosphere matrix and scaled/unscaled tech flows.
+- [Intervention flows](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/intervention_flows.html): Intervention (elementary) flows and inventory results.
+- [Impact categories](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/impact_categories.html): Total, normalized, weighted, and per-process impact results.
+- [Contribution tree](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/contribution_tree.html): Build and traverse the upstream contribution tree.
+- [Costs](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/costs.html): Life cycle costing results.
+- [Analysis groups](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/analysis_groups.html): Group processes and read grouped results.
+- [Sankey graph](https://greendelta.github.io/openLCAJython-manual/calculate/advanced/sankey_graph.html): Extract Sankey diagram data from a result.
+
+## Excel
+
+- [Excel](https://greendelta.github.io/openLCAJython-manual/excel/index.html): Reading and writing Excel files from Jython.
+- [Read](https://greendelta.github.io/openLCAJython-manual/excel/read.html): Read an Excel file.
+- [Write](https://greendelta.github.io/openLCAJython-manual/excel/write.html): Create and write an Excel file.
+
+## Cheat sheet
+
+- [Cheat sheet](https://greendelta.github.io/openLCAJython-manual/cheat_sheet/index.html): Handy snippets.
+- [Shortcut keys](https://greendelta.github.io/openLCAJython-manual/cheat_sheet/shortcut_keys.html): Python editor shortcut keys.
+- [Update the navigator](https://greendelta.github.io/openLCAJython-manual/cheat_sheet/update_navigator.html): Refresh the navigator after changes.
+- [Clear the console](https://greendelta.github.io/openLCAJython-manual/cheat_sheet/clear_console.html): Clear the console output.
+
+## Optional
+
+- [Optional](https://greendelta.github.io/openLCAJython-manual/optional/index.html): Optional setup (usually already present in your database).
+- [Create units and a unit group](https://greendelta.github.io/openLCAJython-manual/optional/create_units_and_unit_group.html): Create units and a unit group.
+- [Create a flow property](https://greendelta.github.io/openLCAJython-manual/optional/create_flow_property.html): Create a flow property.
+
+## Advanced
+
+- [Advanced](https://greendelta.github.io/openLCAJython-manual/advanced/index.html): Advanced topics.
+- [More database functions](https://greendelta.github.io/openLCAJython-manual/advanced/database_functions.html): Model DAOs for name lookups returning several results.
+- [Running SQL queries](https://greendelta.github.io/openLCAJython-manual/advanced/running_sql_queries.html): Run raw SQL with `NativeSql`.
+- [Interacting with the openLCA UI](https://greendelta.github.io/openLCAJython-manual/advanced/openlca_ui.html): Work with the UI (App, Navigator, dialogs).
+- [What you can import](https://greendelta.github.io/openLCAJython-manual/advanced/imports.html): Which Java and Python libraries you can and cannot import (NumPy/Pandas do not work in Jython).
+- [Create modules](https://greendelta.github.io/openLCAJython-manual/advanced/create_modules.html): Organize reusable code into modules.
+- [Meta classes](https://greendelta.github.io/openLCAJython-manual/advanced/meta_classes.html): Type-stub reference for `RootEntity` and descriptors.
+- [To go further](https://greendelta.github.io/openLCAJython-manual/advanced/further.html): Where to go next.
+
+## Examples
+
+- [Examples](https://greendelta.github.io/openLCAJython-manual/examples/index.html): Worked examples and recipes.
+- [Display a diagram with HTML](https://greendelta.github.io/openLCAJython-manual/examples/html_diagram.html): Display data in an HTML diagram (Google Charts).
+- [Excel automation](https://greendelta.github.io/openLCAJython-manual/examples/excel_automation.html): Automate a spreadsheet task with Jython.
+- [Batch calculate to Excel](https://greendelta.github.io/openLCAJython-manual/examples/batch_calculate_to_excel.html): Calculate every product system and write totals to Excel.
+- [Bulk replace a default provider](https://greendelta.github.io/openLCAJython-manual/examples/bulk_replace_provider.html): Set the same default provider across many processes.
+- [Data quality sweep](https://greendelta.github.io/openLCAJython-manual/examples/data_quality_sweep.html): Scan the database for common modelling problems.
+- [Compare scenarios](https://greendelta.github.io/openLCAJython-manual/examples/compare_scenarios.html): Compare a product system under several parameter scenarios.
