@@ -10,6 +10,9 @@ Copy and paste the code from
 
 ## Run the calculation with a parameter redefinition set
 
+Pick one of the product system's saved parameter sets by name and pass its redefinitions into the
+calculation setup.
+
 ```python
 # retrieve an existing product system from the database
 system = db.getForName(ProductSystem, "Coffee brewing")

@@ -1,5 +1,8 @@
 # Move to a category
 
+Assign a process to a category by setting its `category` field to a category you create (or reuse) with
+`CategoryDao.sync`.
+
 ```python
 # create only categories that do not exist
 # (Material production/Metal production)

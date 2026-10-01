@@ -1,5 +1,8 @@
 # Get impact method from the database
 
+You can retrieve an impact method by its name or UUID, fetch its lightweight descriptor, or load every
+method in the database at once.
+
 ```python
 # get and print the impact method by name
 impact_method_by_name = db.getForName(ImpactMethod, "AWARE")

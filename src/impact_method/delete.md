@@ -1,5 +1,7 @@
 # Delete an impact method
 
+Remove an impact method from the database by fetching it and passing it to `db.delete`.
+
 ```python
 # let's assume we want to delete the following impact method from the database
 method = ImpactMethod.of("Impact method")

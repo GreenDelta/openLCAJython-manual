@@ -1,5 +1,8 @@
 # Update an existing product system (edit, add information, etc.)
 
+To change a product system, fetch it from the database, edit its fields, bump its version and write it
+back with `db.update`.
+
 ```python
 # let's say, a product system has been created and inserted in the database
 mass = db.getForName(FlowProperty, "Mass")

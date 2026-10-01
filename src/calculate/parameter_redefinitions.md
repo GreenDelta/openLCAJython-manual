@@ -2,6 +2,9 @@
 
 ## Create a parametrized product system
 
+First, build a small product system whose exchanges reference a global parameter (`intensity`) and a
+process parameter (`with_milk`).
+
 ```python
 number = db.getForName(FlowProperty, "Number")
 mass = db.getForName(FlowProperty, "Mass")
@@ -79,6 +82,9 @@ App.runInUI("Refresh navigator", lambda: Navigator.refresh())
 ```
 
 ## Run the calculation with parameter redefinitions
+
+Then calculate that system while overriding those parameters for this run with `ParameterRedef`
+values.
 
 ```python
 # retrieve an existing product system from the database

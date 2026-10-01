@@ -1,5 +1,8 @@
 # Move a product system to a category
 
+Assign a product system to a category by setting its `category` field to a category you create (or
+reuse) with `CategoryDao.sync`.
+
 ```python
 # create only categories that do not exist, the path is provided
 product_system_category = CategoryDao.sync(

@@ -1,5 +1,8 @@
 # Update exchange amount
 
+Change the amount of an existing exchange by fetching the process, picking the exchange by its flow
+name and writing the process back.
+
 ```python
 # let's say we have the following process in the database
 mass = db.getForName(FlowProperty, "Mass")

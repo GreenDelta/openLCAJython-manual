@@ -1,5 +1,8 @@
 # Run a calculation
 
+Load a product system and an impact method by UUID, build a calculation setup and run it to get the
+total value of the first impact category.
+
 ```python
 # retrieve an existing product system from the database
 system = db.get(ProductSystem, "UUID_of_the_product_system")

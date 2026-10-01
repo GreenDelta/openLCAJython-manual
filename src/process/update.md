@@ -1,5 +1,8 @@
 # Update a process (edit, add information, etc.)
 
+To change a process, fetch it from the database, edit its fields, bump its version and write it back
+with `db.update`.
+
 ```python
 # let's say, we have created an inserted a process
 mass = db.getForName(FlowProperty, "Mass")

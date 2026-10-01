@@ -1,5 +1,8 @@
 # Get processes from the database
 
+You can retrieve a process by its name or UUID, fetch its lightweight descriptor, or load every process
+in the database at once.
+
 ```python
 # get and print the process by name
 process_by_name = db.getForName(Process, "Aluminium ingot")

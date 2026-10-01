@@ -1,5 +1,8 @@
 # Update a flow (edit, add information, etc.)
 
+To change a flow, fetch it from the database, edit its fields, bump its version and write it back with
+`db.update`.
+
 ```python
 # let's say, we have created and inserted a flow
 mass = db.getForName(FlowProperty, "Mass")

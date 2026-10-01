@@ -1,5 +1,7 @@
 # Delete a product system
 
+Remove a product system from the database by fetching it and passing it to `db.delete`.
+
 ```python
 # let's assume we want to delete the following product system from the database
 mass = db.getForName(FlowProperty, "Mass")

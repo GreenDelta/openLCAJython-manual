@@ -1,5 +1,8 @@
 # Get product systems from the database
 
+You can retrieve a product system by its name or UUID, fetch its lightweight descriptor, or load every
+product system in the database at once.
+
 ```python
 # get and print the product system by name
 product_system_by_name = db.getForName(ProductSystem, "Aluminium ingot")

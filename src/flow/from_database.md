@@ -1,5 +1,8 @@
 # Get flows from the database
 
+You can retrieve a flow by its name or UUID, fetch its lightweight descriptor, or load every flow in
+the database at once.
+
 ```python
 # get and print the flow by name
 flow_by_name = db.getForName(Flow, "Aluminium ingot")

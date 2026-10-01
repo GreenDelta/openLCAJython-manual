@@ -10,6 +10,8 @@ method. It takes a `ResultProvider` as well as an `EnviFlow` or `ImpactDescripto
 
 ## Getting an upstream tree
 
+Build the tree from the result provider and the descriptor of the impact category you want to inspect.
+
 ```python
 # retrieve the first impact category
 category = method.impactCategories[0]
