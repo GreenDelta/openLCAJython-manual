@@ -6,7 +6,7 @@ identify which stages of the life cycle contribute most to the overall environme
 
 The contribution tree can be obtained from the `LcaResult` object by using the `UpstreamTree.of`
 method. It takes a `ResultProvider` as well as an `EnviFlow` or `ImpactDescriptor` (see
-[Advanced data model](../data_model/advanced_data_model.md)) object as input. Let's build one:
+[Meta classes](../../advanced/meta_classes.md#impactdescriptor)) object as input. Let's build one:
 
 ## Getting an upstream tree
 
