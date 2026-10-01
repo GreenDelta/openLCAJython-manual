@@ -1,5 +1,11 @@
 # Sankey graph
 
+The Sankey diagram visually represents the impacts of processes within the product system on specific
+flows/impact categories. The diagram shows both the direct contribution and the upstream total
+contribution of the process.
+
+_Source: [openLCA 2 manual — Sankey diagram](https://greendelta.github.io/openLCA2-manual/res_analysis/res_sankey.html)_
+
 openLCA provides an API to gather all the data necessary to create a Sankey graph. The `Sankey`
 class provides methods to gather this data. The Sankey diagram can be created to show the flow of
 material as well as impacts in the product system. Here is an example of how to extract the data for

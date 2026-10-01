@@ -1,8 +1,11 @@
 # Analysis groups
 
 With analysis groups, you can categorize your product system's processes into various categories
-allowing later to group results (see
-[openLCA manual](https://greendelta.github.io/openLCA2-manual/res_analysis/res_analysis_groups)).
+allowing later to group results. This is particularly helpful if you assign groups according to the
+EN15804+A2 modules as used for EPDs. Moreover, it allows you to analyze life cycle stages without
+changing the connectivity within the model graph.
+
+_Source: [openLCA 2 manual — Analysis groups](https://greendelta.github.io/openLCA2-manual/res_analysis/res_analysis_groups.html)_
 
 ## Get the analysis groups
 

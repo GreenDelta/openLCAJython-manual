@@ -2,6 +2,10 @@
 
 The following example creates three flows: a **product**, a **waste** and an **elementary** flow.
 
+Each flow created in openLCA must be associated with a reference flow property, such as mass, volume,
+area, and so on — this is the second argument passed to `Flow.product`, `Flow.waste` and
+`Flow.elementary` below.
+
 ```python
 # get the mass and volume flow properties from the database
 mass = db.getForName(FlowProperty, "Mass")

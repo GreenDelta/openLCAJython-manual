@@ -1,5 +1,13 @@
 # Add a default provider
 
+In openLCA, a "provider" refers to the process that supplies a specific flow (the source or origin of
+a particular input or output flow). The provider information helps to establish the relationships and
+dependencies between different processes and flows within the LCA model, and makes the input / output
+unique. It can be overwritten in a product system, meaning that you can select a new, different
+connecting process in a product system.
+
+_Source: [openLCA 2 manual — Inputs/Outputs](https://greendelta.github.io/openLCA2-manual/processes/tab_inputs_outputs.html)_
+
 In this example, we create a process for the production of beer and add a default provider to the
 input exchange for the production of barley.
 

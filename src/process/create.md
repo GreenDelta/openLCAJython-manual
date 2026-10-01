@@ -2,6 +2,13 @@
 
 The following example creates a process for the production of aluminium.
 
+A process is defined by its **quantitative reference**, which represents the amount of product or
+service that the process provides. In the script below, the output flow `aluminium` passed to
+`Process.of` becomes the quantitative reference (with a default amount of 1 kg), and the other inputs
+and outputs are expressed relative to it.
+
+_Source: [openLCA 2 manual — Processes](https://greendelta.github.io/openLCA2-manual/processes/index.html)_
+
 Inputs:
 
 - 1.9 kg of alumina

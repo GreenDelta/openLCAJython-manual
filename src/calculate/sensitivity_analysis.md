@@ -1,5 +1,10 @@
 # Sensitivity analysis
 
+A sensitivity analysis lets you change given parameter variable(s) across different iterations to see
+how the results respond.
+
+_Source: [openLCA 2 manual — Parameter analysis](https://greendelta.github.io/openLCA2-manual/parameters/parameter_analysis.html)_
+
 In this example, we will run a sensitivity analysis on the model created in
 [Parameter redefinitions](parameter_redefinitions.md#create-a-parametrized-product-system-you-can-skip-this-step).
 

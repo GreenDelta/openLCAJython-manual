@@ -3,6 +3,15 @@
 The following code snippets are probably not very useful. You will probably import LCIA methods into
 your database rather than creating them from scratch.
 
+LCIA categories are stand-alone entities that are stored outside of an LCIA method. A single LCIA
+category can be used in several LCIA methods and an update of such an LCIA category will update it in
+all LCIA methods where it is used.
+
+_Source: [openLCA 2 manual — Impact assessment category tab contents](https://greendelta.github.io/openLCA2-manual/lcia_methods/impact_categories_tab_contents.html)_
+
+The script below mirrors this structure: it creates an `ImpactCategory`, adds characterization factors
+to it with `impact_category.factor(flow, value)`, and then attaches the category to an `ImpactMethod`.
+
 ```python
 # get the mass flow property from the database to create elementary flows
 mass = db.getForName(FlowProperty, "Mass")

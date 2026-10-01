@@ -3,6 +3,13 @@
 This code snippet creates a product system that represents the electrolysis of brine and produces
 sodium chloride.
 
+A product system is built from a **reference process** — the process that models the last step of your
+supply chain, or the last step of a specific chain. From there, the auto-linking function connects
+input and output flows between processes to build up the supply chain. In the script below,
+`brine_electrolysis` is the reference process passed to `ProductSystemBuilder`.
+
+_Source: [openLCA 2 manual — Creating a new product system](https://greendelta.github.io/openLCA2-manual/prod_sys/Creating.html)_
+
 Inputs:
 
 - 4.2 kg of sodium chloride

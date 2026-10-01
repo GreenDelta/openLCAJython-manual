@@ -1,5 +1,10 @@
 # Normalization and weighting sets
 
+You can select a normalization or weighting set for your values. This set needs to be present in the
+impact assessment method.
+
+_Source: [openLCA 2 manual — Calculation and Result Analysis](https://greendelta.github.io/openLCA2-manual/res_analysis/index.html)_
+
 The `withNwSet` method allows to specify a normalization and weighting set. The normalization and
 weighting set can be retrieved from the impact method.
 

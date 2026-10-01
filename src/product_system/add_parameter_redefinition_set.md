@@ -1,5 +1,12 @@
 # Add a parameter redefinition set
 
+openLCA lets you add so called "parameter sets", that allow the user to easily switch between parameter scenarios.
+
+_Source: [openLCA 2 manual — Parameter sets](https://greendelta.github.io/openLCA2-manual/parameters/parameter_sets.html)_
+
+The following script builds a parametrized product system and defines two such scenarios
+("Scenario 1" and "Scenario 2") as parameter redefinition sets (`ParameterRedefSet`).
+
 ```python
 # create a parametrized product system
 

@@ -4,6 +4,11 @@ The calculation setup can be configured by adding the `with...` methods.
 
 ## Allocation method
 
+When a process involves several products, you have to assign how much of the impact each product is
+responsible for.
+
+_Source: [openLCA 2 manual — Allocation](https://greendelta.github.io/openLCA2-manual/allocation.html)_
+
 The allocation method can be selected among the following options:
 
 - `AllocationMethod.USE_DEFAULT`,

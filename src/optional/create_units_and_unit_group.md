@@ -4,6 +4,10 @@ All quantitative amounts of the inputs and outputs in a process have a unit of m
 openLCA convertible units are organized in groups that have a reference unit to which the conversion
 factors of the units are related.
 
+A unit group is a collection of units for a given flow property.
+
+_Source: [openLCA 2 manual — Database elements](https://greendelta.github.io/openLCA2-manual/databases/database_elements.html)_
+
 ```python
 # create units for our mass unit group with a name and a conversion factor
 kg = Unit.of("kg", 1.0)
