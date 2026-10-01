@@ -1,7 +1,10 @@
 # Display a diagram with HTML
 
+> **_NOTE:_** This script must be run in an open BAFU database — the free database available [here](https://nexus.openlca.org/downloads).
+
 The following example shows how to display data in a diagram using HTML. In the example, all output
-amounts of `Emission to air/unspecified/Chromium III` and `Emission to air/unspecified/Chromium VI`
+amounts of `Emission to air/low population density/Zinc II` and
+`Emission to air/low population density/Cadmium II`
 are collected from a database, transformed with `f(x) = log10(x * 1e15)` to make a nice
 distribution, and shown in a histogram using the
 [Google Chart API](https://developers.google.com/chart/interactive/docs/gallery/histogram). An HTML
@@ -38,14 +41,14 @@ def get_results():  # type: () -> List[List[float or str]]
     results = []
 
     category = CategoryDao.sync(
-        db, ModelType.FLOW, "Elementary flows", "Emission to air", "unspecified"
+        db, ModelType.FLOW, "Elementary flows", "Emission to air", "low population density"
     )
 
-    chrom3 = get_flow("Chromium III", category)
-    results.append(collect_amounts(chrom3))
+    zinc = get_flow("Zinc II", category)
+    results.append(collect_amounts(zinc))
 
-    chrom6 = get_flow("Chromium VI", category)
-    results.append(collect_amounts(chrom6))
+    cadmium = get_flow("Cadmium II", category)
+    results.append(collect_amounts(cadmium))
 
     return [list(row) for row in zip(*results)]
 
@@ -82,7 +85,7 @@ def make_html(results):  # type: (List[List[float or str]]) -> str
             var data = google.visualization.arrayToDataTable(%s);
 
             var options = {
-                title: 'Chromium Emission Levels',
+                title: 'Metal Emission Levels',
                 legend: { position: 'bottom' },
                 hAxis: {
                     title: 'log(amount × 1e15)',
@@ -120,7 +123,7 @@ def main():
     html = make_html(results)
 
     shell = Shell(Display.getDefault())
-    shell.setText("Chromium VI")
+    shell.setText("Metal Emissions")
     shell.setLayout(FillLayout())
     browser = Browser(shell, SWT.NONE)
     browser.setText(html)
@@ -128,12 +131,12 @@ def main():
     shell.open()
 
 
-App.runInUI("Visualizing Chromium Emission Levels", main)
+App.runInUI("Visualizing Metal Emission Levels", main)
 ```
 
 To see the result, copy and paste the code above in the openLCA Python console in an opened
-ecoinvent database.
+BAFU database.
 
-With ecoinvent 3.10.1 (APOS), the result looks like this:
+The result looks like this:
 
 ![](html_diagram.png)

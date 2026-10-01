@@ -1,5 +1,7 @@
 # Excel automation
 
+> **_NOTE:_** This script must be run in an open BAFU database — the free database available [here](https://nexus.openlca.org/downloads).
+
 This example shows how a tedious task can be automated using a spreadsheet and Jython.
 
 Our use case is the following:
@@ -9,7 +11,7 @@ Our use case is the following:
 - We want to store the results in a new sheet in the same spreadsheet.
 
 An example spreadsheet can be downloaded [here](excel_automation.xlsx). It provides a list of
-processes from the _ecoinvent v3.10.1 APOS_ database.
+processes from the _BAFU_ database.
 
 Checkout the [Excel](../excel) chapter for more details about how to open the spreadsheet.
 
