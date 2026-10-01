@@ -7,6 +7,10 @@ overwrite the value at the lower level (-). For example, if a process has the sa
 parameter 'x', then within that process, the parameter will have the process parameter value. While in
 another process if 'x' is used, it will have the value of the global parameter.
 
+![Parameter hierarchy in openLCA, from global up to project level](parameter_hierarchy.png)
+
+_Hierarchy of parameters in openLCA_
+
 _Source: [openLCA 2 manual — Parameter hierarchy](https://greendelta.github.io/openLCA2-manual/parameters/hierarchy.html)_
 
 ## Global parameters

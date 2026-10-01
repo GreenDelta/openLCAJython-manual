@@ -1,6 +1,7 @@
 # Parametrize impact category
 
-Parameters can be used in the same way for LCIA categories as for processes.
+Parameters can be used in the same way for LCIA categories as for
+[processes](../process/parametrize.md).
 
 _Source: [openLCA 2 manual — Parameters](https://greendelta.github.io/openLCA2-manual/lcia_methods/impcat_parameters.html)_
 
