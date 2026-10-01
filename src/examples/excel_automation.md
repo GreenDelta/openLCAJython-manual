@@ -149,5 +149,10 @@ output_stream.close()
 # close the workbook to free resources
 workbook.close()
 
+# refresh the navigator — only necessary if you change this script to persist the
+# product systems to the database (e.g. via ProductSystemBuilder.update(db, system));
+# as written, nothing is saved, so there is nothing new to show
+App.runInUI("Refresh navigator", lambda: Navigator.refresh())
+
 print("Done")
 ```
