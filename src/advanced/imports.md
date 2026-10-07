@@ -1,9 +1,42 @@
-# What you can import
+# Available classes and imports
 
-Beyond the openLCA classes that are [available without any import](../how_scripts_run.md), you can
-import more into a script. Here is what is and isn't available.
+This page lists what your scripts can use: the openLCA classes available without any import, how to
+explore them, and the additional things you can import.
 
-## Java classes
+## Classes available without an import
+
+openLCA makes much of its own API available automatically — you can use these directly, no `import`
+needed:
+
+- **Core data model** — `Flow`, `FlowProperty`, `Unit`, `UnitGroup`, `Process`, `Exchange`,
+  `ProductSystem`, `ImpactMethod`, `ImpactCategory`, `ImpactFactor`, `Parameter`, `Location`,
+  `Category`, `Currency`, `NwSet`, `NwFactor`, `Result`, `AnalysisGroup`, `Version`, `RootEntity`
+- **Enumerations** — `FlowType`, `FlowPropertyType`, `ProcessType`, `AllocationMethod`, `Direction`,
+  `ParameterScope`, `ModelType`
+- **Parameter redefinitions** — `ParameterRedef`, `ParameterRedefSet`
+- **Calculation & results** — `CalculationSetup`, `SystemCalculator`, `LcaResult`, `TechFlow`,
+  `TechFlowValue`, `EnviFlow`, `EnviFlowValue`, `ImpactValue`, `UpstreamTree`, `UpstreamNode`, `Sankey`,
+  `AnalysisGroupResult`, `TechIndex`, `EnviIndex`, `NwSetTable`
+- **Building product systems** — `ProductSystemBuilder`, `LinkingConfig`, `ProviderLinking`
+- **Descriptors** — `Descriptor`, `RootDescriptor`, `FlowDescriptor`, `LocationDescriptor`,
+  `ImpactDescriptor`
+- **Database access** — `ProcessDao`, `FlowDao`, `ProductSystemDao`, `CategoryDao`, `NativeSql`
+- **Input/output** — `Excel`
+- **openLCA application** — `App`, `Navigator`, `Editors`, `ResultEditor`, `Workspace`
+
+## How to explore a class
+
+The lists above give the names. To see what a class can actually do — its fields and methods — use
+either reference:
+
+- **API documentation** (Javadoc) for the version this manual targets:
+  [olca-core 2.6.2 API](https://javadoc.io/doc/org.openlca/olca-core/2.6.2) — every class with its
+  methods, and easier to read than the source.
+- **Source code** on GitHub: the data model lives in the
+  [olca-modules repository](https://github.com/GreenDelta/olca-modules/tree/master/olca-core/src/main/java/org/openlca/core/model);
+  open a file such as `Flow.java` to read its fields and methods.
+
+## Importing other Java classes
 
 Any Java class on openLCA's classpath can be imported with `from <package> import <Class>`. This
 includes:
