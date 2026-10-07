@@ -30,14 +30,17 @@ Available without import (auto-bound). The classes used for scripting:
 
 Need an explicit import: MsgBox, Labels (`org.openlca.app.util`); Consumer (`java.util.function`); HashSet (`java.util`); FileInputStream, FileOutputStream (`java.io`); WorkbookFactory (`org.apache.poi.ss.usermodel`); SWT, Browser, Shell, Display, FillLayout (`org.eclipse.swt...`). Interfaces are NOT auto-bound (e.g. ProviderType → `from org.openlca.core.model import ProviderType`). CPython C-extension libraries (NumPy / Pandas / SciPy) do not work in Jython — use the IPC API instead.
 - Most scripts assume an open database that contains reference data and LCIA methods (free from Nexus;
-  see "A minimal example").
+  see "Set up a database").
+- Full class APIs (fields and methods) can be looked up in the olca-core Javadoc
+  (https://javadoc.io/doc/org.openlca/olca-core/2.6.2) or in the olca-modules source on GitHub.
 
 ## Getting started
 
-- [Introduction](https://greendelta.github.io/openLCAJython-manual/introduction/index.html): What Jython is in openLCA and how to open the Python editor.
-- [About this manual](https://greendelta.github.io/openLCAJython-manual/about.html): Scope, version (tested on 2.6.2), and how to contribute.
-- [A minimal example](https://greendelta.github.io/openLCAJython-manual/minimal_example.html): End-to-end walkthrough — set up a database with reference data and LCIA methods, build a product system, and calculate.
-- [How scripts run](https://greendelta.github.io/openLCAJython-manual/how_scripts_run.html): The execution model: pre-bound globals and the classes available without imports.
+- [Introduction](https://greendelta.github.io/openLCAJython-manual/introduction/index.html): What scripting in openLCA is for, what you can automate, whether Jython or the IPC API fits, and the basic-programming prerequisite.
+- [Quickstart](https://greendelta.github.io/openLCAJython-manual/quickstart.html): Open the Python editor (`Tools → Developer Tools → Python`), run your first script, and read a value from the open database.
+- [Set up a database](https://greendelta.github.io/openLCAJython-manual/set_up_a_database.html): Create a database with reference data and import the LCIA methods most scripts need; or start from the free populated BAFU database.
+- [A minimal example](https://greendelta.github.io/openLCAJython-manual/minimal_example.html): End-to-end walkthrough — build flows, a process, and a product system, then calculate a total impact (assumes a database is set up).
+- [Technical details](https://greendelta.github.io/openLCAJython-manual/how_scripts_run.html): The scripting environment — pre-bound globals (db, log, direct), classes usable without imports, and Python 2.7 specifics.
 
 ## Flow
 
@@ -122,7 +125,7 @@ Need an explicit import: MsgBox, Labels (`org.openlca.app.util`); Consumer (`jav
 - [More database functions](https://greendelta.github.io/openLCAJython-manual/advanced/database_functions.html): Model DAOs for name lookups returning several results.
 - [Running SQL queries](https://greendelta.github.io/openLCAJython-manual/advanced/running_sql_queries.html): Run raw SQL with `NativeSql`.
 - [Interacting with the openLCA UI](https://greendelta.github.io/openLCAJython-manual/advanced/openlca_ui.html): Work with the UI (App, Navigator, dialogs).
-- [What you can import](https://greendelta.github.io/openLCAJython-manual/advanced/imports.html): Which Java and Python libraries you can and cannot import (NumPy/Pandas do not work in Jython).
+- [Available classes and imports](https://greendelta.github.io/openLCAJython-manual/advanced/imports.html): The openLCA classes available without an import, how to explore them (Javadoc, source), and which Java/Python libraries you can and cannot import (NumPy/Pandas do not work in Jython).
 - [Create modules](https://greendelta.github.io/openLCAJython-manual/advanced/create_modules.html): Organize reusable code into modules.
 - [Meta classes](https://greendelta.github.io/openLCAJython-manual/advanced/meta_classes.html): Type-stub reference for `RootEntity` and descriptors.
 - [To go further](https://greendelta.github.io/openLCAJython-manual/advanced/further.html): Where to go next.
@@ -133,6 +136,7 @@ Need an explicit import: MsgBox, Labels (`org.openlca.app.util`); Consumer (`jav
 - [Display a diagram with HTML](https://greendelta.github.io/openLCAJython-manual/examples/html_diagram.html): Display data in an HTML diagram (Google Charts).
 - [Excel automation](https://greendelta.github.io/openLCAJython-manual/examples/excel_automation.html): Automate a spreadsheet task with Jython.
 - [Batch calculate to Excel](https://greendelta.github.io/openLCAJython-manual/examples/batch_calculate_to_excel.html): Calculate every product system and write totals to Excel.
-- [Bulk replace a default provider](https://greendelta.github.io/openLCAJython-manual/examples/bulk_replace_provider.html): Set the same default provider across many processes.
-- [Data quality sweep](https://greendelta.github.io/openLCAJython-manual/examples/data_quality_sweep.html): Scan the database for common modelling problems.
-- [Compare scenarios](https://greendelta.github.io/openLCAJython-manual/examples/compare_scenarios.html): Compare a product system under several parameter scenarios.
+
+## About
+
+- [About this manual](https://greendelta.github.io/openLCAJython-manual/about.html): Scope, version (tested on 2.6.2), and how to contribute.
