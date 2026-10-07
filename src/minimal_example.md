@@ -7,20 +7,8 @@ The objective is to create a basic model for boiling water and evaluate its envi
 using the EPD 2018 impact method. This example serves as a starting point for working with openLCA
 programmatically, demonstrating how to retrieve data and run calculations efficiently.
 
-## Create an empty database with reference data and LCIA methods
-
-In the menu, click on `Database → New database → From scratch...`, input a database name and select
-_Complete reference data_ before clicking on _Finish_.
-
-This will create an empty database with the reference data. For more information, see
-[Creating a new database from scratch](https://greendelta.github.io/openLCA2-manual/databases/create_database.html#creating-a-new-database-from-scratch).
-
-Once the database is created, download the openLCA LCIA methods package from Nexus and import it
-into the database you have created. For more information, see
-[Importing LCIA methods into openLCA](https://greendelta.github.io/openLCA2-manual/lcia_methods/importing_lcia_methods.html).
-
-This database is often a good starting point to start modeling with the Python interface (and in
-openLCA more generally).
+This example assumes a database with reference data and the LCIA methods, open in openLCA. If you do
+not have one yet, see [Set up a database](set_up_a_database.md).
 
 Now that you have created a database and opened it, you will be able to interact with its datasets
 via the Python script. The routine is quite simple: create datasets and add them to the database

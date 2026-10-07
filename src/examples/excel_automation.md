@@ -1,6 +1,6 @@
 # Excel automation
 
-> **_NOTE:_** This script must be run in an open BAFU database — the free database available [here](https://nexus.openlca.org/downloads).
+> **_NOTE:_** This script must be run in an open BAFU database — a free, populated database available on [Nexus](https://nexus.openlca.org/downloads). See [Set up a database](../set_up_a_database.md).
 
 This example shows how a tedious task can be automated using a spreadsheet and Jython.
 

@@ -1,88 +1,41 @@
 # Introduction
 
-Welcome to the world of scripting in [openLCA](https://www.openlca.org/)!
+This is a guide to automating openLCA: doing in seconds, with a few lines of instructions, what would
+otherwise be an afternoon of clicking — bulk edits, calculations across many systems, custom exports.
+It does assume some basic programming knowledge — the examples are written in Python, so a little prior
+experience with Python (or any language) will make them much easier to follow.
 
-openLCA is written in Java. It includes a tool for automation and customization:
-[Jython](http://www.jython.org/). Jython is a version of Python 2.7 that runs on Java. It lets you
-write Python code that works inside openLCA.
+To start right away, go to the [Quickstart](../quickstart.md).
 
-To start, go to: `Tools → Developer Tools → Python`.
+## What you can do with it
 
-This opens the built-in Python editor. There, you can write and run scripts to automate tasks, add
-small custom features, or test ideas.
+Common uses include:
 
-![Open the Python editor](open_python_editor.png)
+- **Calculate many product systems at once** and write the results to a single spreadsheet, rather than
+  running and exporting them individually.
+  ([Batch calculate to Excel](../examples/batch_calculate_to_excel.md))
+- **Test sensitivity** by running a system repeatedly with different parameter values.
+  ([Sensitivity analysis](../calculate/sensitivity_analysis.md))
+- **Edit data in bulk** — rename, recategorize, or correct the same field across hundreds of processes
+  in a single pass. ([Update a process](../process/update.md))
+- **Build models from a spreadsheet**, creating flows, processes, and product systems from existing
+  data. ([Create a flow](../flow/create.md), [a process](../process/create.md),
+  [a product system](../product_system/create.md))
+- **Produce custom reports** in the layout you need. ([Excel automation](../examples/excel_automation.md))
 
-To run a script, click the `Run` button in the toolbar of the Python editor:
+## Is this the right tool for me?
 
-![Run a script in openLCA](run_script.png)
+You write your scripts in an editor built into openLCA, so there is nothing to install. openLCA includes
+Python (called Jython) and runs your scripts directly.
 
----
+If you are an experienced Python developer, you may prefer openLCA's
+[IPC API](https://greendelta.github.io/openLCA-ApiDoc/), which lets you control openLCA from your own
+Python installation.
 
-## Hello world!
+## Before you start
 
-You can write normal Python code in the editor. Let’s start with a simple example:
+Scripts write directly to your database, creating, editing, and deleting datasets, and those changes are
+not easily undone. Work on a copy of your database until you are confident that a script behaves as
+intended.
 
-```python
-print("Hello world!")
-```
-
-When you run this, the openLCA console will show:
-
-```
-Hello world!
-```
-
-![Hello world!](hello.png)
-
----
-
-## Relation to standard Python
-
-Jython supports most of the Python 2.7 standard library.
-
-For example, this script writes a small CSV file (change the file path to a real location on your
-computer):
-
-```python
-import csv
-
-# Change this path to your own CSV file location
-FILE = "~/path/to/file.csv"
-
-data = [
-    ["Tea", "1.0"],
-    ["Coffee", "2.0"],
-]
-
-with open(FILE, "w") as file:
-    writer = csv.writer(file)
-    for row in data:
-        writer.writerow(row)
-```
-
-### Important note
-
-Some Python libraries do **not** work with Jython:
-
-- Libraries that use C extensions (for example NumPy)
-- Parts of the standard library that Jython does not support
-
-If you want to use normal Python (CPython) with tools like Pandas or NumPy and still connect to
-openLCA, you can use the [openLCA IPC Python API](https://greendelta.github.io/openLCA-ApiDoc/).
-
----
-
-## The openLCA API
-
-With Jython, you can directly use the openLCA Java API.
-
-You work with Java classes almost like Python classes. The main classes describe the data model, for
-example:
-
-- `Flow`
-- `Process`
-- `ProductSystem`
-
-You can find these classes in the
-[olca-module repository](https://github.com/GreenDelta/olca-modules/tree/master/olca-core/src/main/java/org/openlca/core/model).
+The [Quickstart](../quickstart.md) covers writing and running your first script.

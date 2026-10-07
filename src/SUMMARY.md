@@ -2,11 +2,13 @@
 
 [Introduction](introduction/README.md)
 
-[About this manual](about.md)
+[Quickstart](quickstart.md)
+
+[Set up a database](set_up_a_database.md)
 
 [A minimal example](minimal_example.md)
 
-[How scripts run](how_scripts_run.md)
+[Technical details](how_scripts_run.md)
 
 - [Flow](flow/README.md)
   - [Create from scratch](flow/create.md)
@@ -65,7 +67,7 @@
   - [More database functions](advanced/database_functions.md)
   - [Running SQL queries](advanced/running_sql_queries.md)
   - [Interacting with the openLCA UI](advanced/openlca_ui.md)
-  - [What you can import](advanced/imports.md)
+  - [Available classes and imports](advanced/imports.md)
   - [Create modules](advanced/create_modules.md)
   - [Meta classes](advanced/meta_classes.md)
   - [To go further](advanced/further.md)
@@ -73,3 +75,5 @@
   - [Display a diagram with HTML](examples/html_diagram.md)
   - [Excel automation](examples/excel_automation.md)
   - [Batch calculate to Excel](examples/batch_calculate_to_excel.md)
+
+[About this manual](about.md)
